@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Current Employees table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Employee Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Months Worked</th>
+                    <th scope="col">Monthly Rate ($)</th>
+                    <th scope="col">Totall Billed ($)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+
+        <!-- Add Employees container -->
+        <form class>
+            <div class="form-group">
+                <label> Train name </label>
+                <input id="nameInput" type="text" class="form-control" placeholder="Enter Name">
+
+            </div>
+            <div class="form-group">
+                <label> Destination </label>
+                <input id="destination" type="text" class="form-control" id="ro" placeholder="Role">
+            </div>
+            <div class="form-group">
+                <label> First Train Time (hh:mm) </label>
+                <input id="starttime" type="text" class="form-control" class="datepicker" data-date-format="mm/dd/yyyy"
+                    placeholder=" Start Time ">
+            </div>
+            <div class="form-group ">
+                <label> Frequency </label>
+                <input id="frequency" type="text " class="form-control " placeholder="Frequency ">
+            </div>
+            <button class="btn btn-primary" id="add-train" type="submit">Add Train</button>
+        </form>
+    </div>
+
+
+
+
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyB8OFwwd9sh0aqHyFqpXakmAP_RehUTPIk",
+            authDomain: "first-project371.firebaseapp.com",
+            databaseURL: "https://first-project371.firebaseio.com",
+            projectId: "first-project371",
+            storageBucket: "first-project371.appspot.com",
+            messagingSenderId: "166924289106",
+            appId: "1:166924289106:web:25b7ddb3a68efcf2"
+        };
+        firebase.initializeApp(config);
+        // puts the firebase into a variable
+        var database = firebase.database();
+
+
+        // Initial Values
+        var name = "";
+        var dest = "";
+        var starttime = "";
+        var freq = 0;
+
+
+        $("#add-user").click(function (event) {
+            event.preventDefault();
+
+            name = $("#nameInput").val().trim()
+            dest = $("#destination").val().trim()
+            starttime = $("#starttime").val().trim()
+            freq = $("#frequency").val().trim()
+            //totalBilled = $("totalBilled-input").val().trim()
+
+            database.ref().push({
+                name: name,
+                role: role,
+                startDate: startDate,
+                monthlyRate: monthlyRate,
+                //totalBilled: totalBilled,
+                dateAdded: firebase.database.ServerValue.TIMESTAMP
+
+
+            });
+        });
+
+        database.ref().on("child_added", function (snapshot) {
+            // storing the snapshot.val() in a variable for convenience
+            var sv = snapshot.val();
+
+            // Console.loging the last user's data
+            console.log(sv.name);
+            console.log(sv.role);
+            console.log(sv.startDate);
+            console.log(sv.monthsWorkedDisplay);
+            console.log(sv.rateDisplay)
+            console.log(sv.billedDisplay)
+            //console.log(totalBilled);
+
+            // Change the HTML to reflect
+            $("#nameDisplay").text(sv.name);
+            $("#roleDisplay").text(sv.role);
+            $("#startDisplay").text(sv.startDate);
+            $("#monthsWorkedDisplay").text(sv.monthsWorkedDisplay);
+            $("#rateDisplay").text(sv.rateDisplay);
+            $("#billedDisplay").text(sv.billedDisplay);
+
+
+            // Handle the errors
+        }, function (errorObject) {
+            console.log("Errors handled: " + errorObject.code);
+        });
+    </script>
+
+
+
+</body>
+
+</html>
