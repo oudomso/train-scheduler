@@ -1,0 +1,56 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.jumbotron{
+    margin-top: 20px;
+    background-color: lightblue;
+    text-align: center;
+}
+h1{
+    font-size: 90px;
+    text-align: center;
+}
+.panel{
+    background-color: white;
+    border: solid lightblue 3px;
+    padding: 10px;
+    margin-bottom:20px;
+}
+.panel-head{
+    /* background-color: lightblue; */
+    margin-top: 10px;
+    margin-bottom: 20px; 
+    text-align: center;
+    height: 100px;
+    padding-top: 15px;
+}
+h2{
+    font-size: 50px;
+}
+body
+{
+ background-color: lightgrey;
+ background-size: cover;
+}
+.thehead{
+    font-size:40px;
+    margin:20px;
+    text-align: center;
+    font-weight: bold;
+}
+.form-group{
+    margin: 20px;
+}
+#add-train{
+    margin: 20px;
+    margin-top:0px;
+}
